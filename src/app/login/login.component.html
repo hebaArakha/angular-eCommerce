@@ -1,0 +1,62 @@
+<div class="w-50 m-auto pt-5 align-items-center mt-5">
+  <form #loginForm="ngForm" (ngSubmit)="loggedIn(loginForm)">
+    <!-- Email input -->
+    <h1 class="text-center">EasyCart</h1>
+    <div class="form-outline mb-4">
+      <label class="form-label" for="form2Example1">Email address</label>
+      <input
+        type="email"
+        id="form2Example1"
+        class="form-control"
+        name="email"
+        ngModel
+        #email="ngModel"
+        required
+        pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+      />
+    </div>
+    <!-- input has a value but not valid -->
+    @if (email.touched && email.invalid){
+    <div class="text-danger form-text m-0 p-0">
+      @if(email.errors?.['required']){
+      <small>This field is required</small>
+      } @if(email.errors?.['pattern']){
+      <small>This is an invalid email</small>
+      }
+    </div>
+    }
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="form2Example2">Password</label>
+      <input
+        type="password"
+        id="form2Example2"
+        class="form-control"
+        name="password"
+        ngModel
+        #password="ngModel"
+        required
+        minlength="8"
+      />
+    </div>
+    @if (password.touched && password.invalid){
+    <div class="text-danger form-text mt-0">
+      @if(password.errors?.['required']){
+      <small>This field is required</small>
+      } @if(password.errors?.['minlength']){
+      <small>Password must be at least 8 characters long</small>
+      }
+    </div>
+    }
+
+    <!-- 2 column grid layout for inline styling -->
+    <div class="row">
+      <button type="submit" class="btn btn-primary btn-block mb-4">
+        Log in
+      </button>
+      <p class="mb-0 text-center">
+        Already have an account? <a [routerLink]="'../sign-up'">Sign up</a>
+      </p>
+    </div>
+  </form>
+</div>

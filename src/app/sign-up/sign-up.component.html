@@ -1,0 +1,129 @@
+<div class="w-50 m-auto pt-5 align-items-center">
+  <form [formGroup]="signupForm" (ngSubmit)="handle()">
+    <!-- Email input -->
+    <h1 class="text-center">EasyCart</h1>
+
+    <!-- Name and Username inputs -->
+
+    <div class="form-outline">
+      <label class="form-label" for="formName">Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        id="formName"
+        class="form-control"
+        required
+      />
+    </div>
+    @if(signupForm.controls['name'].touched &&
+    signupForm.controls['name'].invalid){
+    <div class="text-danger form-text m-0 p-0 w-50 float-right">
+      @if(signupForm.controls['name'].errors?.['required']){
+      <small>This field is required</small>
+      } @if(signupForm.controls['name'].errors?.['pattern']){
+      <small>Name can contain letters ans spaces only </small>
+      }
+    </div>
+    }
+    <div class="form-outline">
+      <label class="form-label" for="formUsername">Username</label>
+      <input
+        formControlName="username"
+        type="text"
+        id="formUsername"
+        class="form-control"
+      />
+    </div>
+    @if(signupForm.controls['username'].touched &&
+    signupForm.controls['username'].invalid){
+    <div class="text-danger form-text m-0 p-0">
+      @if(signupForm.controls['username'].errors?.['required']){
+      <small>This field is required</small>
+      } @if(signupForm.controls['username'].errors?.['pattern']){
+      <small>Username can't contain spaces </small>
+      }
+    </div>
+    }
+
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="formEmail">Email address</label>
+      <input
+        formControlName="email"
+        type="email"
+        id="formEmail"
+        class="form-control"
+      />
+    </div>
+    @if(signupForm.controls['email'].touched &&
+    signupForm.controls['email'].invalid){
+    <div class="text-danger form-text m-0 p-0">
+      @if(signupForm.controls['email'].errors?.['required']){
+      <small>This field is required</small>
+      } @if(signupForm.controls['email'].errors?.['email']){
+      <small>This email form is invalid </small>
+      }
+    </div>
+    }
+    <!-- Password inputs -->
+
+    <div class="form-outline">
+      <label class="form-label" for="formPassword">Password</label>
+      <input
+        formControlName="pass1"
+        type="password"
+        id="formPassword"
+        class="form-control"
+      />
+    </div>
+    @if(signupForm.controls['pass1'].touched &&
+    signupForm.controls['pass1'].invalid){
+    <div class="text-danger form-text m-0 p-0">
+      @if(signupForm.controls['pass1'].errors?.['required']){
+      <small>This field is required</small>
+      } @if(signupForm.controls['pass1'].errors?.['pattern']){
+      <small
+        >password length not less than 8 characters , contains at least one
+        lowercase , one uppercase , at least one digit and special character [
+        example : *%$# ] ]
+      </small>
+      }
+    </div>
+    }
+    <div class="form-outline">
+      <label class="form-label" for="formConfirmPassword"
+        >Confirm Password</label
+      >
+      <input
+        formControlName="pass2"
+        type="password"
+        id="formConfirmPassword"
+        class="form-control"
+      />
+    </div>
+    @if(signupForm.controls['pass2'].touched &&
+    signupForm.controls['pass2'].invalid &&
+    !signupForm.controls['pass1'].errors?.['required'] &&
+    !signupForm.controls['pass1'].errors?.['pattern']) {
+    <div class="text-danger form-text m-0 p-0">
+      @if(signupForm.controls['pass1'].value!=signupForm.controls['pass2'].value){
+      <small>Passwords don't match</small>
+      }
+    </div>
+    }
+
+    <!-- Sign Up button and Log In link -->
+    <div class="row mt-3">
+      <button
+        type="submit"
+        [disabled]="signupForm.invalid"
+        class="btn btn-primary btn-block mb-4"
+      >
+        Sign Up
+      </button>
+      <p class="mb-0 text-center">
+        Already have an account? <a [routerLink]="'../login'">Log in</a>
+      </p>
+    </div>
+  </form>
+</div>
