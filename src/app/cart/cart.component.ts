@@ -16,5 +16,7 @@ export class CartComponent {
     this.cartService.getCartItems().subscribe((res)=>this.cartItems = res);
     
   }
-
+  removeItem(id:number){
+    this.cartService.deleteItem(id);
+  }
 }

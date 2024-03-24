@@ -21,8 +21,13 @@ export class CartService {
   addCartItem(cartItem: Object) {
     const currentCartItems = this.cartItems.getValue();
     console.log(currentCartItems);
-    
+
     currentCartItems.push(cartItem);
     this.cartItems.next(currentCartItems);
+  }
+  deleteItem(id: number) {
+    const currentCartItems = this.cartItems.getValue();
+    const filteredCartItems = currentCartItems.filter((item: any) => item.id !== id);
+    this.cartItems.next(filteredCartItems);
   }
 }
